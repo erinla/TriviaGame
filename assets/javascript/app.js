@@ -25,7 +25,8 @@ $(document).ready(function () {
     var incorrectAnswers = 0;
     var unansweredQuestions = 0;
     var timeLeft = 5;
-    var timerInterval = 0;
+    var gameRunning = false;
+    var downloadTimer;
 
     var questions = [
         {
@@ -79,10 +80,9 @@ $(document).ready(function () {
 
 
     function createQuestions() {
+        gameRunning = true;
         $(".question").empty();
         for (var i = 0; i < questions.length; i++) {
-
-            // if (i < questions.length - 1) {
             var h2 = $('<h2>');
             h2.text(questions[i].question)
             $(".question").append(h2);
@@ -94,8 +94,9 @@ $(document).ready(function () {
                 button.attr("data-index", [i])
                 $(".question").append(button);
             }
-            // }
         }
+        timer();
+
     }
 
 
@@ -104,7 +105,9 @@ $(document).ready(function () {
         var dataIndex = $(this).attr("data-index")
         console.log(dataValue)
         var correctAnswer = questions[dataIndex].answer;
-
+        if (!gameRunning) {
+            return false;
+        }
         if (dataValue === correctAnswer) {
             correctAnswers++
             console.log("Correct answers " + correctAnswers)
@@ -113,34 +116,42 @@ $(document).ready(function () {
             console.log("Incorrect answers " + incorrectAnswers)
         }
         if (correctAnswers + incorrectAnswers === 8) {
-            clearTimeout(timeLeft);
+            gameRunning = false;
+            clearInterval(downloadTimer);
             $(".question").empty();
             $("#countdown").hide();
-            var winTally = $('<h3>');
-            winTally.text(correctAnswers)
-            $(".win-tally").append("Correct Answers: " + correctAnswers);
-            var lossTally = $('<h3>');
-            lossTally.text(correctAnswers)
-            $(".loss-tally").append("Incorrect Answers: " + incorrectAnswers);
+            var winTally = '<h3>' + correctAnswers + '</h3>';
+            $(".win-tally").html("Correct Answers: " + correctAnswers);
+            var lossTally = '<h3>' + incorrectAnswers + '</h3>';
+            $(".loss-tally").html("Incorrect Answers: " + incorrectAnswers);
+            restartGame();
 
         }
-
     })
 
+    function restartGame() {
+        $(".start").html("Play Again?");
+        $(".start").show();
+
+
+
+    }
+
     function timer() {
-        var downloadTimer = setInterval(function () {
+        $("#countdown").show();
+        downloadTimer = setInterval(function () {
             document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
             timeLeft -= 1;
             if (timeLeft <= 0) {
                 clearInterval(downloadTimer);
+                gameRunning = false;
                 document.getElementById("countdown").innerHTML = "Time's Up!"
                 $(".question").empty();
-                var winTally = $('<h3>');
-                winTally.text(correctAnswers)
-                $(".win-tally").append("Correct Answers: " + correctAnswers);
-                var lossTally = $('<h3>');
-                lossTally.text(correctAnswers)
-                $(".loss-tally").append("Incorrect Answers: " + incorrectAnswers);
+                var winTally = '<h3>' + correctAnswers + '</h3>';
+                $(".win-tally").html("Correct Answers: " + correctAnswers);
+                var lossTally = '<h3>' + incorrectAnswers + '</h3>';
+                $(".loss-tally").html("Incorrect Answers: " + incorrectAnswers);
+                restartGame();
             }
         }
             , 1000);
@@ -151,17 +162,10 @@ $(document).ready(function () {
     $(".start").on("click", function () {
         createQuestions();
         $(".start").hide();
-        timer();
-        if (correctAnswers + incorrectAnswers === 7) {
-            $(".question").empty();
-            var winTally = $('<h3>');
-            winTally.text(correctAnswers)
-            $(".win-tally").append("Correct Answers: " + correctAnswers);
-            var lossTally = $('<h3>');
-            lossTally.text(correctAnswers)
-            $(".loss-tally").append("Incorrect Answers: " + incorrectAnswers);
-        }
-
+        correctAnswers = 0;
+        incorrectAnswers = 0;
+        timeLeft = 5;
+        document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
     });
 
 
