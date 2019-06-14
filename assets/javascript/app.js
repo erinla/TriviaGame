@@ -24,7 +24,7 @@ $(document).ready(function () {
     var correctAnswers = 0;
     var incorrectAnswers = 0;
     var unansweredQuestions = 0;
-    var timeLeft = 30;
+    var timeLeft = 5;
     var timerInterval = 0;
 
     var questions = [
@@ -82,19 +82,19 @@ $(document).ready(function () {
         $(".question").empty();
         for (var i = 0; i < questions.length; i++) {
 
-            if (i < questions.length - 1) {
-                var h2 = $('<h2>');
-                h2.text(questions[i].question)
-                $(".question").append(h2);
-                for (var j = 0; j < 4; j++) {
-                    var button = $('<button>');
-                    button.text(questions[i].choices[j])
-                    button.addClass("btn-question btn-info p-3 m-3")
-                    button.attr("data-value", questions[i].choices[j])
-                    button.attr("data-index", [i])
-                    $(".question").append(button);
-                }
+            // if (i < questions.length - 1) {
+            var h2 = $('<h2>');
+            h2.text(questions[i].question)
+            $(".question").append(h2);
+            for (var j = 0; j < 4; j++) {
+                var button = $('<button>');
+                button.text(questions[i].choices[j])
+                button.addClass("btn-question btn-info p-3 m-3")
+                button.attr("data-value", questions[i].choices[j])
+                button.attr("data-index", [i])
+                $(".question").append(button);
             }
+            // }
         }
     }
 
@@ -104,12 +104,25 @@ $(document).ready(function () {
         var dataIndex = $(this).attr("data-index")
         console.log(dataValue)
         var correctAnswer = questions[dataIndex].answer;
+
         if (dataValue === correctAnswer) {
             correctAnswers++
             console.log("Correct answers " + correctAnswers)
         } else {
             incorrectAnswers++
             console.log("Incorrect answers " + incorrectAnswers)
+        }
+        if (correctAnswers + incorrectAnswers === 8) {
+            clearTimeout(timeLeft);
+            $(".question").empty();
+            $("#countdown").hide();
+            var winTally = $('<h3>');
+            winTally.text(correctAnswers)
+            $(".win-tally").append("Correct Answers: " + correctAnswers);
+            var lossTally = $('<h3>');
+            lossTally.text(correctAnswers)
+            $(".loss-tally").append("Incorrect Answers: " + incorrectAnswers);
+
         }
 
     })
@@ -128,10 +141,9 @@ $(document).ready(function () {
                 var lossTally = $('<h3>');
                 lossTally.text(correctAnswers)
                 $(".loss-tally").append("Incorrect Answers: " + incorrectAnswers);
-
-
             }
-        }, 1000);
+        }
+            , 1000);
     }
 
 
@@ -140,6 +152,15 @@ $(document).ready(function () {
         createQuestions();
         $(".start").hide();
         timer();
+        if (correctAnswers + incorrectAnswers === 7) {
+            $(".question").empty();
+            var winTally = $('<h3>');
+            winTally.text(correctAnswers)
+            $(".win-tally").append("Correct Answers: " + correctAnswers);
+            var lossTally = $('<h3>');
+            lossTally.text(correctAnswers)
+            $(".loss-tally").append("Incorrect Answers: " + incorrectAnswers);
+        }
 
     });
 
