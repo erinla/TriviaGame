@@ -71,7 +71,7 @@ $(document).ready(function () {
             question: "Finish that lyric! \nHold me close and hold me fast...",
             choices: ["And dance with me all night", "Let us make this moment last", "The magic spell you cast", "Spin me around the dance floor"],
             answer: "The magic spell you cast",
-            image: ("assets/immages/rose.jpg")
+            image: ("assets/images/rose.jpg")
         },
         {
             question: "Finish that lyric! \nStart spreading the news...",
@@ -83,7 +83,6 @@ $(document).ready(function () {
     function createQuestions(index) {
         gameRunning = true;
         $(".question").empty();
-
         var h2 = $('<h2>');
         h2.text(questions[index].question)
         $(".question").append(h2);
@@ -96,11 +95,12 @@ $(document).ready(function () {
             $(".question").append(button);
         }
 
-
+        $(function () {
+            $('#pictures').attr('src', questions[index].image);
+        });
         timer();
 
     }
-
 
 
     $(document).on("click", ".btn-question", function () {
@@ -126,7 +126,10 @@ $(document).ready(function () {
 
         if (correctAnswers + incorrectAnswers === 1) {
             createQuestions(index);
-            timeLeft = 15
+            timeLeft = 15;
+
+
+
 
 
         }
@@ -170,9 +173,6 @@ $(document).ready(function () {
     function restartGame() {
         $(".start").html("Play Again?");
         $(".start").show();
-
-
-
     }
 
 
@@ -183,6 +183,7 @@ $(document).ready(function () {
             timeLeft -= 1;
             if (timeLeft <= 0) {
                 clearInterval(downloadTimer);
+                $("#pictures").hide();
                 gameRunning = false;
                 document.getElementById("countdown").innerHTML = "Time's Up!"
                 $(".question").empty();
@@ -204,7 +205,10 @@ $(document).ready(function () {
         correctAnswers = 0;
         incorrectAnswers = 0;
         timeLeft = 15;
+        timeLeft--;
         document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
+        var hr = $('<hr>')
+        $("countdown").append(hr);
     });
 
 });

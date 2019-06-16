@@ -30,27 +30,32 @@
 </head>
 
 <body>
+    <div class="trivia text-center mt-4 py-2 display-3 text-white">Timed Lyrics Trivia Game</div>
 
 
-    <div class="container bg-white mt-5 py-5">
-        <div class="row justify-content-md-center">
+    <div class="container bg-white mt-5 mb-5 py-5 mx-auto">
+        <div class="row justify-content-md-center text-center">
             <div class="col-md-8">
+                <button type="button" class="start btn btn-danger btn-lg">Start</button>
+                <div id="countdown" class="text-center text-danger display-3"></div>
+                <hr>
+            </div>
+        </div>
 
 
-                <button type="button" class="mx-auto start btn btn-danger btn-lg">Start</button>
+        <div class="row mt-4 text-center">
+            <div class="col-md-8 mx-auto">
 
-                <div id="countdown" class="text-danger display-3"></div>
+                <div class="question mx-auto"></div>
 
-                <div class="question"></div>
+                <img id="pictures" class="mx-auto justify-content-md-center text-center"
+                    src="assets/images/microphone.jpg" width="300px" height="750px">
 
-                <div class="display-3 win-tally"></div>
+                <div class="text-center display-3 win-tally"></div>
 
-                <div class="display-3 loss-tally"></div>
+                <div class="text-center display-3 loss-tally"></div>
 
                 <div class="restart"></div>
-
-
-
 
             </div>
         </div>

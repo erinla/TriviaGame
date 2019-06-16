@@ -86,8 +86,11 @@ $(document).ready(function () {
         $(".question").empty();
         for (var i = 0; i < questions.length; i++) {
             var h2 = $('<h2>');
+            var hr = $('<hr>')
+            $(".question").append(hr);
             h2.text(questions[i].question)
             $(".question").append(h2);
+
             for (var j = 0; j < 4; j++) {
                 var button = $('<button>');
                 button.text(questions[i].choices[j])
@@ -95,8 +98,7 @@ $(document).ready(function () {
                 button.attr("data-value", questions[i].choices[j])
                 button.attr("data-index", [i])
                 $(".question").append(button);
-                var hr = $('<hr>')
-                $(".question").append(hr);
+
             }
         }
         timer();
