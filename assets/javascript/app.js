@@ -24,7 +24,7 @@ $(document).ready(function () {
     var correctAnswers = 0;
     var incorrectAnswers = 0;
     var unansweredQuestions = 0;
-    var timeLeft = 15;
+    var timeLeft = 30;
     var gameRunning = false;
     var downloadTimer;
     var index = 0;
@@ -32,49 +32,49 @@ $(document).ready(function () {
 
     var questions = [
         {
-            question: "Finish that lyric! \nMoon river, wider than a mile...",
+            question: "Finish that lyric! Moon river, wider than a mile...",
             choices: ["I'm crossing you in style someday", "The moon shines on the waves today", "Rivers make me smile", "I'll be seeing you, it has been a while"],
             answer: "I'm crossing you in style someday",
             image: ("assets/images/moonriver.jpg")
         },
         {
-            question: "Finish that lyric! \nYou make me feel so young...",
+            question: "Finish that lyric! You make me feel so young...",
             choices: ["You make me feel like bells have been rung", "You make me feel so spring has sprung", "You make me feel like I'm 19 again", "You make me feel so happy"],
             answer: "You make me feel so spring has sprung",
             image: ("assets/images/spring.jpg")
         },
         {
-            question: "Finish that lyric! \nI've got you under my skin...",
+            question: "Finish that lyric! I've got you under my skin...",
             choices: ["And it feels like a total win", "You're really getting on my nerves", "I have got you, deep in the heart of me", "I wish you would go away"],
             answer: "I have got you, deep in the heart of me",
             image: ("assets/images/heart.jpg")
         },
         {
-            question: "Finish that lyric! \nThey call you Lady Luck...",
+            question: "Finish that lyric! They call you Lady Luck...",
             choices: ["But I call you Lady Grace", "And I'm your Sir Unlucky", "Cheers to the good life", "But there is room for doubt"],
             answer: "But there is room for doubt",
             image: ("assets/images/dice.jpg")
         },
         {
-            question: "Finish that lyric! \nHeaven, I'm in heaven... ",
+            question: "Finish that lyric! Heaven, I'm in heaven... ",
             choices: ["And my heart beats so that I can hardly speak", "The angels sing all around me", "The view is so beautiful from here", "Help me bring my feet back down"],
             answer: "And my heart beats so that I can hardly speak",
             image: ("assets/images/dance.jpg")
         },
         {
-            question: "Finish that lyric! \nIt was just one of those things...",
+            question: "Finish that lyric! It was just one of those things...",
             choices: ["It makes my heart dance and sing", "Just one of those crazy flings", "You make me feel like I've grown wings", "Now it's time to buy me a ring"],
             answer: "Just one of those crazy flings",
             image: ("assets/images/cheers.jpg")
         },
         {
-            question: "Finish that lyric! \nHold me close and hold me fast...",
+            question: "Finish that lyric! Hold me close and hold me fast...",
             choices: ["And dance with me all night", "Let us make this moment last", "The magic spell you cast", "Spin me around the dance floor"],
             answer: "The magic spell you cast",
             image: ("assets/immages/rose.jpg")
         },
         {
-            question: "Finish that lyric! \nStart spreading the news...",
+            question: "Finish that lyric! Start spreading the news...",
             choices: ["I'm quitting my job for love", "I've got the blues", "The birds sing a tune", "I'm leaving today"],
             answer: "I'm leaving today",
             image: ("assets/images/newyork.jpg")
@@ -95,6 +95,8 @@ $(document).ready(function () {
                 button.attr("data-value", questions[i].choices[j])
                 button.attr("data-index", [i])
                 $(".question").append(button);
+                var hr = $('<hr>')
+                $(".question").append(hr);
             }
         }
         timer();
@@ -166,7 +168,7 @@ $(document).ready(function () {
         $(".start").hide();
         correctAnswers = 0;
         incorrectAnswers = 0;
-        timeLeft = 5;
+        timeLeft = 30;
         document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
     });
 

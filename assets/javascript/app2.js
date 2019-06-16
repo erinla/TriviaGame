@@ -124,12 +124,41 @@ $(document).ready(function () {
         }
 
 
-        if (correctAnswers === 1 || incorrectAnswers === 1) {
+        if (correctAnswers + incorrectAnswers === 1) {
             createQuestions(index);
+            timeLeft = 15
 
+
+        }
+        if (correctAnswers + incorrectAnswers === 2) {
+            createQuestions(index);
+            timeLeft = 15
+
+        }
+        if (correctAnswers + incorrectAnswers === 3) {
+            createQuestions(index);
+            timeLeft = 15
+        }
+        if (correctAnswers + incorrectAnswers === 4) {
+            createQuestions(index);
+            timeLeft = 15
+        }
+        if (correctAnswers + incorrectAnswers === 5) {
+            createQuestions(index);
+            timeLeft = 15
+        }
+        if (correctAnswers + incorrectAnswers === 6) {
+            createQuestions(index);
+            timeLeft = 15
+        }
+        if (correctAnswers + incorrectAnswers === 7) {
+            createQuestions(index);
+            timeLeft = 15
         }
 
         if (correctAnswers + incorrectAnswers === 8) {
+            timeLeft = 0;
+            $("#countdown").hide();
             restartGame();
         }
 
@@ -145,6 +174,7 @@ $(document).ready(function () {
 
 
     }
+
 
     function timer() {
         $("#countdown").show();
@@ -173,100 +203,8 @@ $(document).ready(function () {
         $(".start").hide();
         correctAnswers = 0;
         incorrectAnswers = 0;
-        timeLeft = 30;
+        timeLeft = 15;
         document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
     });
-
-
-    //*********************************************************************************** */
-    // function createQuestions() {
-    //     gameRunning = true;
-    //     $(".question").empty();
-    //     for (var i = 0; i < questions.length; i++) {
-    //         var h2 = $('<h2>');
-    //         h2.text(questions[i].question)
-    //         $(".question").append(h2);
-    //         for (var j = 0; j < 4; j++) {
-    //             var button = $('<button>');
-    //             button.text(questions[i].choices[j])
-    //             button.addClass("btn-question btn-info p-3 m-3")
-    //             button.attr("data-value", questions[i].choices[j])
-    //             button.attr("data-index", [i])
-    //             $(".question").append(button);
-    //         }
-    //     }
-    //     timer();
-
-    // }
-
-
-    // $(document).on("click", ".btn-question", function () {
-    //     var dataValue = $(this).attr("data-value")
-    //     var dataIndex = $(this).attr("data-index")
-    //     console.log(dataValue)
-    //     var correctAnswer = questions[dataIndex].answer;
-    //     if (!gameRunning) {
-    //         return false;
-    //     }
-    //     if (dataValue === correctAnswer) {
-    //         correctAnswers++
-    //         console.log("Correct answers " + correctAnswers)
-    //     } else {
-    //         incorrectAnswers++
-    //         console.log("Incorrect answers " + incorrectAnswers)
-    //     }
-    //     if (correctAnswers + incorrectAnswers === 8) {
-    //         gameRunning = false;
-    //         clearInterval(downloadTimer);
-    //         $(".question").empty();
-    //         $("#countdown").hide();
-    //         var winTally = '<h3>' + correctAnswers + '</h3>';
-    //         $(".win-tally").html("Correct Answers: " + correctAnswers);
-    //         var lossTally = '<h3>' + incorrectAnswers + '</h3>';
-    //         $(".loss-tally").html("Incorrect Answers: " + incorrectAnswers);
-    //         restartGame();
-
-    //     }
-    // })
-
-    // function restartGame() {
-    //     $(".start").html("Play Again?");
-    //     $(".start").show();
-
-
-
-    // }
-
-    // function timer() {
-    //     $("#countdown").show();
-    //     downloadTimer = setInterval(function () {
-    //         document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
-    //         timeLeft -= 1;
-    //         if (timeLeft <= 0) {
-    //             clearInterval(downloadTimer);
-    //             gameRunning = false;
-    //             document.getElementById("countdown").innerHTML = "Time's Up!"
-    //             $(".question").empty();
-    //             var winTally = '<h3>' + correctAnswers + '</h3>';
-    //             $(".win-tally").html("Correct Answers: " + correctAnswers);
-    //             var lossTally = '<h3>' + incorrectAnswers + '</h3>';
-    //             $(".loss-tally").html("Incorrect Answers: " + incorrectAnswers);
-    //             restartGame();
-    //         }
-    //     }
-    //         , 1000);
-    // }
-
-
-
-    // $(".start").on("click", function () {
-    //     createQuestions();
-    //     $(".start").hide();
-    //     correctAnswers = 0;
-    //     incorrectAnswers = 0;
-    //     timeLeft = 5;
-    //     document.getElementById("countdown").innerHTML = timeLeft + " seconds remaining";
-    // });
-
 
 });
